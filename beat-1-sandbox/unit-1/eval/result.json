@@ -1,0 +1,48 @@
+{
+  "rubric": "/Users/nawanggurung/Projects/ai301-coursework/tools/issue-select/skill/rubric.md",
+  "model": "sonnet",
+  "agreement": [
+    0,
+    0
+  ],
+  "results": [
+    {
+      "id": "calib-03",
+      "verdict": "reject",
+      "failed_checks": [
+        "Maintainer alive",
+        "Repo in use",
+        "Scope fits newcomer",
+        "Unclaimed"
+      ],
+      "checks": [
+        {
+          "name": "Maintainer alive",
+          "grade": "fail",
+          "evidence": "Last default-branch commit by a human is 2024-12-17, far beyond 90 days before the 2026-08-05 capture date."
+        },
+        {
+          "name": "Repo in use",
+          "grade": "fail",
+          "evidence": "Latest release 3.2.4 is 2024-11-01 and last commit is 2024-12-17, neither within 12 months / 90 days of capture."
+        },
+        {
+          "name": "Scope fits newcomer",
+          "grade": "fail",
+          "evidence": "Five open linked PRs (#1900, #1903, #1908, #1911, #1916) meet the '3+ linked PRs working on different parts' fail condition."
+        },
+        {
+          "name": "Unclaimed",
+          "grade": "fail",
+          "evidence": "linked PRs: httpie/cli#1900 (open); #1903 (open); #1908 (open); #1911 (open); #1916 (open) \u2014 pass condition requires no open linked PR."
+        },
+        {
+          "name": "AI policy allows contribution",
+          "grade": "pass",
+          "evidence": "contribution policy (CONTRIBUTING.md): no statement on AI or contribution tooling."
+        }
+      ],
+      "error": null
+    }
+  ]
+}
