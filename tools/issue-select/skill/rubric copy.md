@@ -30,16 +30,16 @@ newcomer, and nobody else is already on it. A rubric that ignores a family
 will fail eval issues designed around that family.
 -->
 
-## Checks## Checks
+## Checks
 
 | Check | Evidence | Pass condition | Weight |
 |---|---|---|---|
 | Maintainer alive | the "last 5 default-branch commits" list in the repo-facts block | at least one of the 5 commits (human-authored, or a bot merging a human's pull request) is dated within 90 days of the bundle's capture date | required |
-| Scope and design settled | issue body, comment thread| The scope is strictly defined. It is not left open by the author (eg., marked "TBD", "possibly","likely") without maintainer confirmation, and no maintainer states the design is unsettled | required |ß
-| Actionable Code Task | issue body | The issue represents a clear defect or feature request, not a pure usuage, troubleshooting, or support question. | required |ß
-| Appropriate Complexity | comment thread | No maintainer states in the thread that the fix requires modifying core internals. | required |
+| Repo in active use | "last push to any branch" and the "archived:" flag in the repo-facts block | the repo is not archived AND the last push to any branch is within 90 days of the capture date | required |
+| Scope fits a newcomer | the issue body, the comment thread, and the "linked PRs" line | the issue is one bounded deliverable a single contributor could finish in one PR — a checklist of related edits toward one feature/page still counts as bounded, but an umbrella issue that explicitly invites separate contributors to split off independent sub-items (e.g. a list of other issue/PR links to divide up) does not. Fails if: it is a pure usage/support question; a maintainer states in the thread that it touches core internals or that the design is still unsettled; the issue's own scope is left open by its author (marked TBD / "possibly" / "likely" with no maintainer confirmation of what's wanted); or it carries a history of multiple closed, unmerged linked PRs that already attempted it | required |
+| Unclaimed | the "assignees:" and "linked PRs:" line, and claim comments in the thread | no assignee, AND no currently open linked PR working the issue (a closed/unmerged linked PR, or an old claim comment nobody followed through on, does not count against it) | required |
+| Allowed under contribution policy | the "contribution policy" line in the repo-facts block | the policy does not state an outright ban on AI-generated contributions (disclosure, personal-understanding, testing, or human-review conditions still pass; a policy that says nothing about AI passes) | required |
 | Recently released | "latest release" in the repo-facts block | the latest release is within 180 days of the capture date | preferred |
-| No PR Graveyard | "Linked PRs" line, comment thread | The issue does not have a history of multiple closed, unmerged PRs that already attempted to solve it. | required |
 
 ## Verdict rule
 

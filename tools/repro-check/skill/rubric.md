@@ -38,16 +38,21 @@ a pass, a confident wrong-target is not), and the words respect the
 repo's conventions. A rubric that ignores a family will fail eval
 packages designed around that family.
 -->
-
 ## Checks
 
 | Check | Evidence | Pass condition | Weight |
 |---|---|---|---|
-|  |  |  |  |
+| Environment recorded | Repro report (Environment section) | The report lists the operating system, language, and key dependency versions. | required |
+| Steps followable | Repro report (Steps section) | The steps are a continuous, sequential list of copy-pasteable terminal commands or exact UI click-paths starting from a fresh state. | required |
+| Behavior proven | Repro report (Observed behavior) | The report includes raw terminal output, stack traces, or screenshots that match the original issue's description. If the outcome is an honest connot-reproduce(see Honest outcome), artifacts from the real attempt - showing what was tried and what differed from the issue's trigger conditions- satisfy this check instead.| required |
+| Honest outcome | Issue context, Repro report | The logs/ screenshots actually match the steps taken. If "cannot reproduce", the author provided the exact steps they tried that resulted in success. | required |
+| AI Disclosure Compliant | repo-facts, claim comment, repro report | If the repository's contribution requires AI disclosure, the user must have disclosed it in their comments. (Passes automatically if the policy mentions nothing about AI). | required |
+| Professional Claim | Claim comment | The comment explicitly names the issue and promises an investigation or attempt, without guaranteeing a fix or a timeline. | required |
 
 ## Verdict rule
 
-<!-- State how the grades above combine into accept or reject, and how
-unclear is treated. Example shape (write your own): "accept if every
-required check passes; preferred checks never change the verdict;
-unclear counts as fail." -->
+Accept only if every required check passes. Reject if any required check
+fails. `unclear` on a required check counts as a fail (a first issue you
+cannot verify is not a first issue you should take); `unclear` on a
+preferred check is just noted, since preferred checks never change the
+verdict. Preferred checks only rank the issues that are accepted.
