@@ -1,53 +1,76 @@
 # Procedure: how this skill grades a plan package
 
-<!--
-THIS IS THE PART YOU WRITE, and it is a new kind of part. Weeks 1 and
-2, SKILL.md carried a numbered workflow and you only wrote judgment
-files. This week the workflow is gone from the frame: SKILL.md says
-"execute procedure.md", and these are the operating steps you author.
-The machinery is in your hands now.
-
-Your operator swap is the design brief. When your executor stalled
-because your rubric said WHAT to decide but not HOW to find the
-evidence, that was a procedure gap. This file is where those gaps get
-closed: a complete procedure lets someone who has never seen a plan
-package before (a groupmate, or the skill itself) grade one exactly the
-way you would.
-
-Under each stage heading below, write the concrete steps for that
-stage. The one-line note under each heading says what a complete
-procedure must decide there. Write steps, not intentions: "read the
-repro evidence before the plan, and note what behavior it pins down"
-is a step; "understand the context" is a wish.
--->
-
 ## Read order
 
-<!-- What gets read, in what order, before any check is graded, and
-what to note down from each part while reading. A complete procedure
-decides the order (issue first? repro evidence first?) and says why
-the order matters for the checks that come later. -->
+1. Read the issue first: its title and body. Note the reported bug
+   and the expected behavior.
+2. Read the thread highlights. Note any maintainer comments.
+3. Read the repo-facts block and the repro evidence. Note what
+   behavior the repro pins down.
+4. Read the candidate plan last, so it is judged against the issue
+   rather than the other way round. Note its stated cause, its list of
+   changes and files, its not-in-scope line, and its test plan.
+5. Read the candidate plan comment.
+
+The issue comes first because every check asks whether the plan fits
+the issue it belongs to; reading the plan first lets its framing stand
+in for the issue.
 
 ## Evidence gathering
 
-<!-- For each evidence family your rubric's checks name, the concrete
-gathering move: which part of the package (or, live, which page or
-thread location per your evidence guide) to pull the fact from, and
-what to record. A complete procedure leaves no check whose evidence an
-executor would have to hunt for. -->
+For each check in `rubric.md`, record the quote or fact named here
+before grading anything:
+
+- **diagnosis**: quote the sentence in the plan that states the cause
+  of the bug (often under "Cause" or "Diagnosis"). Then list every repro
+  step, control run, and Expected/Actual line, and mark each one
+  "explained", "contradicts", or "not addressed" by that cause. Note
+  whether the cause first appears as a claim in the thread.
+- **scope**: quote the files the plan names as changing and its
+  not-in-scope line. List every change in the plan and mark each one
+  "needed for the bug" or "extra" (refactor, rename, migration,
+  dependency bump, new feature, redesign).
+- **stranger-can-start**: quote the location (file, function, or code
+  area) and the concrete edit for each change. Record "goal only" for a
+  change that states an aim but no edit.
+- **test**: quote the test plan. Record the observable outcome it names,
+  and whether that outcome would differ between the broken and fixed
+  code, using the repro's Actual line as the broken result.
+- **thread-direction**: quote every thread comment from an OWNER,
+  MEMBER, or COLLABORATOR that gives direction (where the cause is,
+  which approach, what to test), and any linked or open PR. Then quote
+  where the plan comment follows it or explains diverging, or record
+  "not engaged". If there is no such comment or PR, record "none".
+- **ai-policy**: quote the AI part of the repo-facts contribution
+  policy, or record "no AI policy". Record whether its requirements
+  apply to issue comments or only to pull requests or code. If they
+  apply to comments, quote the part of the plan comment that meets
+  them, or record "missing".
+
+If a check's evidence is not in the package, record "not found" for
+that check. Do not look anywhere outside the package.
 
 ## Check execution
 
-<!-- How one check runs against gathered evidence: in what order the
-checks execute, what an executor does when evidence for a check is
-genuinely absent, and when a check may be graded without re-reading
-the whole package. A complete procedure makes two executors grade the
-same package the same way. -->
+1. Grade the checks in the order they appear in `rubric.md`'s table.
+2. Grade each check only from the evidence recorded for it above,
+   against its pass condition:
+   - **P (pass)**: the recorded evidence meets the pass condition.
+   - **F (fail)**: the recorded evidence does not meet it.
+   - **? (unclear)**: the evidence was "not found", or it could be read
+     either way.
+3. Write one line per check: its grade and the quote or fact that
+   decided it.
+4. Do not change a grade because the plan feels good or bad overall;
+   only the pass condition decides.
 
 ## Verdict assembly
 
-<!-- How the per-check grades become the final accept or reject:
-apply your rubric's verdict rule, state how unclear grades enter it,
-and say what gets quoted in the output for the deciding check. A
-complete procedure produces the same verdict from the same grades,
-every time. -->
+1. Look only at the checks weighted `required`.
+2. If every required check is P, the verdict is `accept` (ready).
+3. If any required check is F or ?, the verdict is `reject` (hold).
+   `?` counts as a fail.
+4. `preferred` checks are reported but never change the verdict.
+5. In the summary, name the first required check that was not P and
+   quote the evidence that decided it, then emit the JSON block that
+   SKILL.md specifies, mapping P/F/? to `pass`/`fail`/`unclear`.

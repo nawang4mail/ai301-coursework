@@ -1,66 +1,84 @@
 # Evidence guide: where evidence lives in a plan package
 
-<!--
-THIS IS THE PART YOU WRITE (second week running: the judgment files
-stay in your hands). The skill uses this guide as its map: for every
-kind of evidence a rubric check names, this file says WHERE to find it
-in a plan package and WHAT GOOD LOOKS LIKE when you do.
-
-Under each family heading below, write:
-
-- Where it lives: the exact places to look. In an eval bundle (which
-  section of the package: the issue context, the repro-evidence block,
-  the candidate plan's scope statement or test plan, the plan comment,
-  the repo-facts block). In live mode (where on GitHub or in the
-  draft: the issue thread, the student's posted repro comment, the
-  repo's docs, the draft plan and comment).
-- What good looks like: one or two sentences someone else could apply.
-  Prefer observable conditions ("the stated cause cites behavior the
-  repro evidence actually shows") over adjectives ("diagnosis is
-  solid").
-
-A rubric check whose evidence this guide cannot locate is a check
-nobody else can execute, and this week that cuts twice: your
-procedure.md tells the skill WHEN to gather each family, and this
-guide tells it WHERE. Write the map you wish your executor had.
--->
+Each section says where to look in an eval bundle, where to look in
+live mode, and what good looks like. The rubric check that reads each
+family is named in brackets.
 
 ## Diagnosis and grounding
 
-<!-- Where the plan states its cause, and where the repro evidence
-pins down the behavior that cause must explain. What it means for a
-diagnosis to follow from the evidence rather than contradict or
-ignore it. -->
+[check: `diagnosis`]
+
+- Where it lives (eval): the candidate plan's cause statement, usually
+  a `Cause:` line or a `Diagnosis` section. The behavior it must
+  explain is in the repro-evidence block's steps and its `Expected:` /
+  `Actual:` lines.
+- Where it lives (live): the cause section of the student's `plan.md`,
+  read against the student's posted repro comment on the issue.
+- What good looks like: the plan names the mechanism that produces the
+  bug (what goes wrong, and where), and that cause explains every repro
+  step. A control run is the strongest evidence: if the repro shows the
+  bug still happening with the blamed part bypassed, the cause is
+  wrong, however confident the plan sounds. A cause copied from a
+  thread comment counts only if the repro backs it.
 
 ## Scope
 
-<!-- Where the plan bounds itself: the in-scope statement, the
-not-in-scope line, the files or areas named. What one bounded change
-looks like next to a drive-by rewrite. -->
+[check: `scope`]
+
+- Where it lives (eval): the candidate plan's change list and any
+  `In:` / `Out:` or `In scope` / `Not in scope` lines.
+- Where it lives (live): the change and scope sections of `plan.md`.
+- What good looks like: every file the change touches is named by
+  path, there is an explicit line saying what the plan will not touch,
+  and every change is needed for the reported bug. A fix bundled with
+  a refactor, migration, or redesign is not bounded, even if the
+  plan calls the extra work "cleanup".
 
 ## Executability
 
-<!-- Where the plan says what will actually be done: files or areas,
-approach, order of work. What it means for a stranger to be able to
-start executing without asking the author anything. -->
+[check: `stranger-can-start`]
+
+- Where it lives (eval): the candidate plan's change list or `Change:`
+  line, and the files, functions, or code areas it names.
+- Where it lives (live): the change section of `plan.md`.
+- What good looks like: a stranger could open the named file and
+  start the edit without asking the author what to do.
 
 ## Test plan
 
-<!-- Where the plan says how success will be observed, and how that
-maps onto the repro evidence's steps and artifacts. What a decisive
-test plan names that a vague one does not. -->
+[check: `test`]
+
+- Where it lives (eval): the candidate plan's `Test:` line or `Test
+  plan` section, read against the repro-evidence block's steps.
+- Where it lives (live): the test section of `plan.md`.
+- What good looks like: the test names an observable result that
+  differs between broken and fixed code, usually the repro steps
+  re-run with the expected result stated. A manual re-run of the
+  repro counts; "verify it works" does not.
 
 ## Honesty
 
-<!-- Where claims meet uncertainty: risks, unknowns, and deviations.
-How to tell stated unknowns from false confidence, and where an
-honest mid-build deviation gets recorded. -->
+[no check in `rubric.md` reads this family yet]
+
+- Where it lives (eval): any risks, unknowns, or "to check" lines in
+  the candidate plan, and the claims in the candidate plan comment.
+- Where it lives (live): the risks or unknowns section of `plan.md`,
+  and its `Deviations` section after the build.
+- What good looks like: anything the repro evidence did not establish
+  is named as an unknown, not stated as fact.
 
 ## Comms
 
-<!-- Where the words meet the thread and the repo: the plan comment
-read against the issue's maintainer signals (thread highlights, or
-the live thread) and against the repo-facts block's stated templates,
-contributing asks, and contribution policy (including AI-use
-disclosure requirements). What thread-aware looks like next to
-boilerplate. -->
+[checks: `thread-direction`, `ai-policy`]
+
+- Where it lives (eval): the candidate plan comment, read against the
+  thread highlights (especially OWNER, MEMBER, or COLLABORATOR
+  comments and any linked PR) and the repo-facts block's contribution
+  policy, including any AI-use policy.
+- Where it lives (live): the student's draft plan comment, read
+  against the live issue thread and the repo's CONTRIBUTING.md and any
+  AI policy file.
+- What good looks like: the comment responds to what maintainers have
+  already said in the thread, and meets any AI-use rule the repo
+  states for comments. An AI policy that only covers pull requests or
+  code asks nothing of an issue comment.
