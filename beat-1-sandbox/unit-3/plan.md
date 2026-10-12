@@ -132,3 +132,12 @@ line 21 is `OPENROUTER_API_KEY=` and a dummy value set there loads as
 `'test-key-73'`. The one step I did not run is `make test`, because it
 needs the project's full virtualenv; the change is a single line in a
 template file that no test reads.
+
+Update after the build (Unit 4 testing): the test plan above says to run
+`make test`, but the Makefile has no `test` target (it has `test-unit`,
+`test-integration`, and `test-all`). In its place I ran the four checks
+Path Review's PR template lists, on commit `7c9ab78`: `make test-unit`
+(375 passed, 53 xfailed), `make test-integration` (no tests ran: the repo
+has no integration tests yet), `make lint` (passed), and `make typecheck`
+(passed). The repro was re-run on the committed branch with the same
+results as above. Full output is in `test_evidence.md`.
